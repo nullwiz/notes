@@ -1,0 +1,3 @@
+-
+- title:: the protocols file
+- Similarly to the service file, this one acts like a mini db. [[getprotoent(3)]] is the relevant function here. As the services file, there are similar functions.
