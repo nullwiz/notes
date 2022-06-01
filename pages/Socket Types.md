@@ -1,0 +1,13 @@
+- # [[SOCK_STREAM]]
+  -> Typically used for Stream I/O with a remote socket
+  -> Same concept that applies to unix pipe. Bytes written at the end of pipe, are received at the other end as continuous
+  stream of bytes.
+  -> No boundaries, no record length, no block size, no concept of "packet" at receiving end
+  -> Whatever data is currently available at the receiving end is returned in the caller's buffer
+  -> Guaranteed order of data at receiving end, If failure, error is reported and recovery attempts are automatic
+- # [[SOCK_DGRAM]]
+  -> Not particularly reliable
+  -> Used in situations where data is not absolutely required to be in sequence at the remote end
+  -> Packets might be lost, no attempt to recover
+  -> Datagram packets have size limits
+  -> Packets sent in unconnected manner, permits a program to address its message to a different remote process with each message written to the same socket
