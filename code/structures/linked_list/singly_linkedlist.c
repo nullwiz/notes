@@ -69,7 +69,7 @@ void *remove_dups_runner(node_t **head){
     if (current->next != NULL)
         next = current->next;
     // When first pointer points to null, next pointer == first pointer
-    while(current->next!=NULL && next!=NULL){ //O(n)
+    while(current->next!=NULL && next!=NULL){ //O(n^2)
         // Remove next pointer if it equals current value
         if(current->value == next->value){
             delete_node(&current, next);
@@ -93,6 +93,7 @@ void *remove_dups_runner(node_t **head){
 }
 
 // Remove dups from unsorted linked list. Using a pointer buffer this is O(n^2) [while doing n, we do n].
+// If I used a HashSet this would be O(n)
 void *remove_dups(node_t **head){
     node_t *current = *head; 
     node_t *tmp = NULL; 
@@ -100,7 +101,6 @@ void *remove_dups(node_t **head){
     while (current!=NULL){ //O(n)
         value = find_value(tmp,current->value); //O(n)
         if(value!= NULL){
-            //printf("skipping value %d\n", current->value);
             current = current->next; 
             continue;
         }
@@ -125,11 +125,32 @@ void *insert_node_after_node(node_t *node, node_t *node_to_insert){
 void printlist(node_t *head){
     node_t *current = head;
     while(current != NULL){
-        printf("%d -> ", current->value);
+        printf("%d ->", current->value, current, current->next);
         current = current->next;
     }
     free(current);
-    printf("NULL\n");
+    printf("\n");
+}
+
+void *partition_around_value(node_t *head, int value){
+   node_t *current = head; 
+   node_t *less = NULL; 
+   node_t *more_or_equal = NULL;
+   while (current!=NULL){
+       if (current->value < value){
+           insert_node_at_head_pointer(&less, create_new_node(current->value));
+       }
+       if (current->value >= value){
+           insert_node_at_head_pointer(&more_or_equal, create_new_node(current->value));
+       }
+       current = current->next;
+   }
+   printlist(less);
+   printf("  ->  ");
+   printlist(more_or_equal);
+   free(less);
+   free(more_or_equal);
+   free(current);
 }
 
 // O(n)
@@ -144,6 +165,38 @@ node_t *k_to_last(node_t *head, int k){
     return current;
 }
 
+int *sum_two_lists(node_t *head, node_t *secondhead){
+    // First translate to a string, then to int again
+    node_t *digit_1 = head;
+    node_t *digit_2 = secondhead;
+    int first_sum = 0; 
+    int value; 
+    for(int i = 0; digit_1 !=NULL;i++){
+        first_sum = first_sum + digit_1->value * 10^i; 
+        digit_1 = digit_1->next;
+    }
+    printf("%d\t", first_sum);
+    int second_sum = 0; 
+
+    for(int i = 0; digit_2 !=NULL;i++){
+       second_sum  = second_sum + digit_2->value * 10^i; 
+        digit_2 = digit_2->next;
+    }
+    printf("%d\t", second_sum);
+
+    int totalsum = first_sum + second_sum;
+    
+    printf("%d\t\n", totalsum);
+    // Create a new node, add values to it 
+    int n = log10(totalsum) + 1;
+    int i; 
+    node_t *new_node = NULL; 
+    for(i = 0; i < n; ++i, totalsum /=10){
+        insert_node_at_head_pointer(&new_node, create_new_node(totalsum % 10));
+    }
+    printlist(new_node);
+    free(new_node);
+}
 
 int main(){
     node_t *head = NULL;
@@ -217,6 +270,22 @@ int main(){
     
     printf("================\n");
     printlist(k_to_last(new_head,3));
+    int arrx[3] = {7,1,6};
+    int arry[3] = {5,9,2};
+    node_t *first_digit = NULL; 
+    node_t *second_digit = NULL; 
+    new_head = NULL; 
+    printf("================\n");
+    for (int i=0; i<3;i++){
+        insert_node_at_head_pointer(&first_digit,create_new_node(arrx[i]));
+    }
+    for (int i=0; i<3;i++){
+        insert_node_at_head_pointer(&second_digit,create_new_node(arry[i]));
+    }
+    printlist(first_digit);
+    printlist(second_digit);
+
+    sum_two_lists(first_digit, second_digit);
     return 0;
 
 }
