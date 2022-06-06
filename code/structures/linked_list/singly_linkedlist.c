@@ -198,6 +198,36 @@ int *sum_two_lists(node_t *head, node_t *secondhead){
     free(new_node);
 }
 
+node_t *create_from_list(int arr[],int len){
+    node_t *node = NULL;
+    for (int i=len-1;i!=-1;i--){
+        printf("%d\n",i);
+        insert_node_at_head_pointer(&node,create_new_node(arr[i]));
+    }
+    return node;
+}
+int is_palindrome(node_t *head){
+    // Check if node is palindrome
+    node_t *current = head;
+    node_t *reverse = NULL;
+    while(current != NULL){
+        insert_node_at_head_pointer(&reverse, create_new_node(current->value));
+        current = current->next;
+    }
+    current = head;
+    node_t *reverse_current = reverse;
+    while(current != NULL){
+        if(current->value != reverse_current->value){
+            return 0;
+        }
+        current = current->next;
+        reverse_current = reverse_current->next;
+    }
+    return 1;
+}
+
+
+
 int main(){
     node_t *head = NULL;
     node_t *tmp;
@@ -286,6 +316,13 @@ int main(){
     printlist(second_digit);
 
     sum_two_lists(first_digit, second_digit);
+
+    printf("================\n");
+    int nano[5] = {1,0,1,0,1};
+    node_t *newnode = create_from_list(nano,5);
+    printlist(newnode);
+    printf("is it? %d\n", is_palindrome(newnode));
+
     return 0;
 
 }
