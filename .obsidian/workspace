@@ -1,0 +1,97 @@
+{
+  "main": {
+    "id": "18c9bc1e6c936f14",
+    "type": "split",
+    "children": [
+      {
+        "id": "568c0d34e363dd3d",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "pages/Socket Types.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "9d4032281dc5728b",
+    "type": "split",
+    "children": [
+      {
+        "id": "e078b2abdf294b56",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7cde27ceba0aaa24",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "c4bbb4accaada04e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "511eac9821dc6a78",
+    "type": "split",
+    "children": [
+      {
+        "id": "384701e35f26ed0a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "31dcb4271decb7cb",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "pages/Socket Types.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "568c0d34e363dd3d",
+  "lastOpenFiles": [
+    "pages/Socket Types.md",
+    "pages/Linux Socket Programming - C.md",
+    "pages/contents.md",
+    "pages/_socket types_.md",
+    "journals/2022_04_09.md"
+  ]
+}

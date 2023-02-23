@@ -4,6 +4,32 @@
 #define MAX_NAME 256
 #define TABLE_SIZE 20
 
+// Quick note dynamically resizable arrays
+// http://www.cplusplus.com/doc/tutorial/dynamic/
+// in some languages arrays are automatically resizable, it will grow as needed
+// as we append items. In Java, the array sze can't change after it's creation
+// (much like C).
+// A typical implementation would be to just duplicate the size
+// when it's full. In C, we can use a pointer to a function to dynamically
+// resize the array. The function should take the current size of the array
+// and return a pointer to a new array of the new size (we can use calloc() and realloc() to do this).
+// The function should also free the old array.
+// Example:
+int* resize(int* arr, int size) {
+    int* new_arr = calloc(size * 2, sizeof(int)); 
+    if (new_arr == NULL) {
+        printf("Error allocating memory\n");
+        return 1;
+    }
+    // realloc() will copy the contents of the old array to the new one
+    // and free the old one.
+    new_arr = realloc(arr, size * 2);
+    if (new_arr == NULL) {
+        printf("Error allocating memory\n");
+        return 1;
+    }
+    return new_arr;
+}
 
 struct Node {
     char *value;
@@ -95,12 +121,7 @@ Node *create_new_node(char *value){
     result->next = NULL;
     return result;
 }
-
-// Node *insert_node_at_head(Node **head, Node *node_to_insert){
-//     node_to_insert->next = *head;
-//     *head = node_to_insert;
-// }
-
+// O(n)
 Node *find_value(Node *head, char value){
     Node *current = head;  
     while(current != NULL){
@@ -111,10 +132,6 @@ Node *find_value(Node *head, char value){
     }
     return NULL;
 }
-// find value by key
-// Node *find_value_by_key(Node *head, char *key){
-// };
-
 
 int main(){
     init_hash_table();
